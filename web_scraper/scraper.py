@@ -10,6 +10,12 @@ import requests
 
 URL = "https://en.wikipedia.org/wiki/Monosodium_glutamate"
 
+prompt = """
+Check for citations needed on a wikipedia article.
+Please provide a wikipedia url:
+>"""
+
+URL = input(prompt)
 
 def get_citations_needed_count(url):
     page = requests.get(url)
@@ -33,8 +39,12 @@ def get_citations_needed_report(url):
 
     citation_list = [citation.find_parent("p").text for citation in citations]
 
+    #handle duplicate parent elements
+    citation_list = list(set(citation_list))
+
     citations_string = ""
 
+    #extract passages requiring citation
     for p in citation_list:
 
         s = p.split("]")
