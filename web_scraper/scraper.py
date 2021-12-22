@@ -37,9 +37,9 @@ def get_citations_needed_report(url):
 
     for p in citation_list:
 
-        f = p.split("]")
-        f = filter(lambda txt: "[citation needed" in txt, f)
-        for txt in f:
+        s = p.split("]")
+        s = filter(lambda txt: "[citation needed" in txt, s)
+        for txt in s:
             citations_string += ("\n" + txt + "]\n")
 
     print(citations_string)
